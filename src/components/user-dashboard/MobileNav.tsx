@@ -22,24 +22,30 @@ const SecondHalf = [
   {
     icon: House,
     title: "خانه",
+    route: "/dashboard",
   },
   {
     icon: MessageSquare,
     title: "پیام ها",
+    route: "/dashboard",
   },
 ];
 
 const MobileNav = () => {
   return (
-    <div className="flex items-center  font-medium px-5 justify-around relative md:hidden w-full h-20">
+    <div className="flex items-center  font-medium px-5 justify-around fixed bottom-0 bg-white/10 backdrop-blur-sm md:hidden w-full h-20">
       {SecondHalf.map((items, index) => {
         return (
-          <button className="flex gap-2 cursor-pointer flex-col items-center" key={index}>
+          <Link
+            to={items.route}
+            className="flex gap-2 cursor-pointer flex-col items-center"
+            key={index}
+          >
             <span>
               <items.icon />
             </span>
             <span> {items.title}</span>
-          </button>
+          </Link>
         );
       })}
 
@@ -49,7 +55,10 @@ const MobileNav = () => {
 
       {FirstHalf.map((items, index) => {
         return (
-          <button className="flex gap-2 cursor-pointer flex-col items-center" key={index}>
+          <button
+            className="flex gap-2 cursor-pointer flex-col items-center"
+            key={index}
+          >
             <span>
               <items.icon />
             </span>

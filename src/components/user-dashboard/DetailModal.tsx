@@ -1,4 +1,4 @@
-import type { Appointment } from "@/types";
+import type { Appointment, Consultant } from "@/types";
 import {
   CalendarDays,
   Clock3,
@@ -10,10 +10,11 @@ import {
 
 type Props = {
   appointment: Appointment;
+  consultant: Consultant;
   toggleModal: () => void;
 };
 
-const DetailModal = ({ appointment, toggleModal }: Props) => {
+const DetailModal = ({ consultant, appointment, toggleModal }: Props) => {
   const getStatusStyle = (status: Appointment["status"]) => {
     switch (status) {
       case "تایید شده":
@@ -65,14 +66,14 @@ const DetailModal = ({ appointment, toggleModal }: Props) => {
           {/* Doctor */}
           <div className="flex flex-col items-center rounded-xl border bg-white p-5 shadow-sm sm:flex-row sm:gap-5">
             <img
-              src={appointment.ProfilePicture}
-              alt={appointment.doctorName}
+              src={consultant.profilePicture}
+              alt={consultant.name}
               className="h-20 w-20 rounded-full border-2 border-slate-100 object-cover sm:h-24 sm:w-24"
             />
 
             <div className="mt-4 text-center sm:mt-0 sm:text-right">
               <p className="text-xl font-bold text-zinc-800">
-                {appointment.doctorName}
+                {consultant.name}
               </p>
 
               <div className="mt-2 flex items-center justify-center gap-2 text-sm text-zinc-500 sm:justify-start">
@@ -134,7 +135,7 @@ const DetailModal = ({ appointment, toggleModal }: Props) => {
                 <div>
                   <p className="text-xs text-zinc-400">مشاور</p>
                   <p className="mt-1 text-sm font-semibold text-zinc-700">
-                    {appointment.doctorName}
+                    {consultant.name}
                   </p>
                 </div>
               </div>

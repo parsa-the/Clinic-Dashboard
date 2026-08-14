@@ -13,19 +13,25 @@ import {
   UserRound,
   Users,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const SideBarBtns = [
-  { title: "داشبورد", icon: House },
-  { title: "نوبت های من", icon: CalendarDays },
-  { title: "مشاوران", icon: Users },
-  { title: "خدمات", icon: VscCollectionSmall },
-  { title: "پیام ها", icon: MessageSquare },
-  { title: "مقالات و منابع", icon: NotepadText },
-  { title: "پروفایل", icon: UserRound },
-  { title: "تنظیمات", icon: Settings },
+const Logout =()=>{
+  localStorage.clear()
+}
+
+
+const UserSideBarBtns = [
+  { title: "داشبورد", icon: House, route: "/dashboard" },
+  { title: "نوبت های من", icon: CalendarDays ,route: "/dashboard"},
+  { title: "مشاوران", icon: Users, route: "/consultant-page" },
+  { title: "خدمات", icon: VscCollectionSmall ,route: "/dashboard"},
+  { title: "پیام ها", icon: MessageSquare ,route: "/dashboard"},
+  { title: "مقالات و منابع", icon: NotepadText,route: "/dashboard" },
+  { title: "پروفایل", icon: UserRound ,route: "/dashboard"},
+  { title: "تنظیمات", icon: Settings ,route: "/dashboard"},
 ];
 
-const Sidebar = () => {
+const UserSidebar = () => {
   return (
     <aside className="hidden relative md:flex h-dvh w-64 shrink-0 flex-col bg-sky-950 p-3 text-white">
       <header className="my-5 flex items-center justify-center gap-2 p-3">
@@ -37,23 +43,24 @@ const Sidebar = () => {
       </header>
 
       <nav className="w-full px-2">
-        {SideBarBtns.map(({ title, icon: Icon }) => (
-          <button
+        {UserSideBarBtns.map(({ title, icon: Icon, route }) => (
+          <Link
+            to={route}
             key={title}
             className={`mb-1 font-medium hover:bg-white/3 transition-colors duration-300 flex w-full items-center gap-3 rounded-xl p-4 pr-3 text-md`}
           >
             <Icon size={24} className="shrink-0" />
             <p>{title}</p>
-          </button>
+          </Link>
         ))}
       </nav>
       <footer className="px-2 mt-auto">
-        <button className="mb-1 font-medium hover:bg-white/3 transition-colors duration-300 flex w-full items-center gap-3 rounded-xl p-4 pr-3 text-md">
+        <Link to={"/login"} onClick={Logout} className="mb-1 font-medium hover:bg-white/3 transition-colors duration-300 flex w-full items-center gap-3 rounded-xl p-4 pr-3 text-md">
           <LogOut size={24} /> <p className="">خروج</p>
-        </button>
+        </Link>
       </footer>
     </aside>
   );
 };
 
-export default Sidebar;
+export default UserSidebar;

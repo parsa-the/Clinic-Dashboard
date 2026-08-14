@@ -1,12 +1,13 @@
-import MobileNav from "../components/dashboard/MobileNav";
-import Header from "../components/dashboard/Header";
-import { useDashboard } from "../features/hooks/useDashboard";
+import MobileNav from "../../components/user-dashboard/MobileNav";
+import Header from "../../components/user-dashboard/Header";
+import { useDashboard } from "../../features/hooks/useDashboard";
 import toast, { LoaderIcon } from "react-hot-toast";
 import { CalendarDaysIcon, CheckCircle2, Clock, Star } from "lucide-react";
 import type { DashboardStats } from "@/types";
-import UpcomingAppointments from "../components/dashboard/UpcomingAppointments";
-import DetailModal from "../components/dashboard/DetailModal";
+import UpcomingAppointments from "../../components/user-dashboard/UpcomingAppointments";
+import DetailModal from "../../components/user-dashboard/DetailModal";
 import { useState } from "react";
+import { useConsultants } from "../../features/hooks/useConsultants";
 
 const Dashboard = () => {
   const CardsDataArray = (stats: DashboardStats) => [
@@ -41,13 +42,14 @@ const Dashboard = () => {
   ];
 
   const { data, isError, isLoading } = useDashboard();
+  const { data: consultants = [] } = useConsultants();
 
   if (isError) {
     toast.error("یک مشکلی پیش آمده!");
   }
 
   return (
-    <section className="flex h-full w-full flex-col">
+    <section className="flex  h-full w-full flex-col">
       <Header />
 
       {isLoading && (
@@ -57,12 +59,11 @@ const Dashboard = () => {
       )}
 
       {data && (
-        <main className="flex-1  overflow-auto bg-slate-50 px-4 py-2 sm:px-6 md:px-10">
+        <main className="flex-1  overflow-auto pb-30 bg-slate-50 px-4 py-2 sm:px-6 md:px-10">
           <div className="mx-auto  w-full max-w-[1600px]">
             <h1 className="py-6 text-xl font-bold sm:py-8 sm:text-2xl md:text-3xl">
               داشبورد
             </h1>
-
             <div className="grid mb-5 grid-cols-2 gap-4 sm:gap-5 xl:grid-cols-4  lg:gap-5 ">
               {CardsDataArray(data.stats).map((item) => (
                 <div
@@ -89,12 +90,14 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-
-            <UpcomingAppointments appointments={data.upcomingAppointments} />
+            <UpcomingAppointments
+              appointments={data.upcomingAppointments}
+              consultants={consultants}
+            />
           </div>
         </main>
       )}
-      <MobileNav />
+      
     </section>
   );
 };

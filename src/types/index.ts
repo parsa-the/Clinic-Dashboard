@@ -26,8 +26,8 @@ export type AppointmentStatus =
 
 export interface Appointment {
   id: string;
-  doctorName: string;
-  ProfilePicture: string;
+  consultantId: string;
+  patientId: string;
   service: string;
   date: string;
   startTime: string;
@@ -40,9 +40,15 @@ export type Consultant = {
   specialty: string;
   profilePicture: string;
   rating: number;
-  reviewCount: number;
   bio: string;
   experience: number;
-  services: string[];
+  service: string;
   consultationPrice: number;
+  span:number
+  availability: Availability[];
+};
+
+export type Availability = {
+  day: string;
+  slots: string[];
 };
