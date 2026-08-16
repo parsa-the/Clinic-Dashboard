@@ -62,7 +62,10 @@ const ConsultantDashboardPage = () => {
 
         <div className="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
           {cards.map(({ title, value, icon: Icon }) => (
-            <div key={title} className="rounded-2xl border bg-white p-5 shadow-sm">
+            <div
+              key={title}
+              className="rounded-2xl border bg-white p-5 shadow-sm"
+            >
               <Icon className="text-teal-700" size={28} />
               <p className="mt-4 text-sm text-slate-500">{title}</p>
               <p className="mt-2 text-3xl font-black">
@@ -103,10 +106,11 @@ const ConsultantDashboardPage = () => {
                       onChange={(event) =>
                         updateStatus.mutate({
                           id: appointment.id,
-                          status: event.target.value as typeof appointment.status,
+                          status: event.target
+                            .value as typeof appointment.status,
                         })
                       }
-                      className="rounded-lg border bg-white px-2 py-1 text-xs font-semibold"
+                      className="rounded-lg border bg-white p-2 px-3 text-xs font-semibold"
                     >
                       <option value="در انتظار">در انتظار</option>
                       <option value="تایید شده">تأیید شده</option>

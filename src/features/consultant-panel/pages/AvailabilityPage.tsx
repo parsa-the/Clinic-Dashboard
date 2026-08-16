@@ -12,7 +12,9 @@ const AvailabilityPage = () => {
   const query = useAvailability();
   const update = useUpdateAvailability();
   const [draft, setDraft] = useState<ConsultantAvailability | null>(null);
-  const [blockedInputs, setBlockedInputs] = useState<Record<number, string>>({});
+  const [blockedInputs, setBlockedInputs] = useState<Record<number, string>>(
+    {},
+  );
 
   useEffect(() => {
     if (query.data) setDraft(query.data);
@@ -77,7 +79,10 @@ const AvailabilityPage = () => {
         ...current,
         workingDays: current.workingDays.map((day, index) =>
           index === dayIndex
-            ? { ...day, ranges: [...day.ranges, { from: "14:00", to: "18:00" }] }
+            ? {
+                ...day,
+                ranges: [...day.ranges, { from: "14:00", to: "18:00" }],
+              }
             : day,
         ),
       };
@@ -91,7 +96,10 @@ const AvailabilityPage = () => {
         ...current,
         workingDays: current.workingDays.map((day, index) =>
           index === dayIndex
-            ? { ...day, ranges: day.ranges.filter((_, index2) => index2 !== rangeIndex) }
+            ? {
+                ...day,
+                ranges: day.ranges.filter((_, index2) => index2 !== rangeIndex),
+              }
             : day,
         ),
       };
@@ -186,12 +194,20 @@ const AvailabilityPage = () => {
                       key={`${day.day}-${rangeIndex}`}
                       className="grid items-center gap-3 rounded-xl bg-slate-50 p-3 sm:grid-cols-[auto_1fr_auto_1fr_auto]"
                     >
-                      <Clock3 className="hidden text-slate-400 sm:block" size={18} />
+                      <Clock3
+                        className="hidden text-slate-400 sm:block"
+                        size={18}
+                      />
                       <input
                         type="time"
                         value={range.from}
                         onChange={(event) =>
-                          setRange(dayIndex, rangeIndex, "from", event.target.value)
+                          setRange(
+                            dayIndex,
+                            rangeIndex,
+                            "from",
+                            event.target.value,
+                          )
                         }
                         className="rounded-lg border bg-white px-3 py-2"
                       />
@@ -200,7 +216,12 @@ const AvailabilityPage = () => {
                         type="time"
                         value={range.to}
                         onChange={(event) =>
-                          setRange(dayIndex, rangeIndex, "to", event.target.value)
+                          setRange(
+                            dayIndex,
+                            rangeIndex,
+                            "to",
+                            event.target.value,
+                          )
                         }
                         className="rounded-lg border bg-white px-3 py-2"
                       />
