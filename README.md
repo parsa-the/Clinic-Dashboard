@@ -1,77 +1,92 @@
-# React + TypeScript + Vite
+# Clinic Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+وب‌اپلیکیشن فارسی و RTL برای رزرو و مدیریت نوبت‌های یک مرکز درمانی، ساخته‌شده با React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+## امکانات پیاده‌سازی‌شده
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### مراجعه‌کننده
 
-## React Compiler
+- ورود با ایمیل یا شماره موبایل به صورت Mock
+- Dashboard و آمار نوبت‌ها
+- نمایش نوبت‌های آینده و جزئیات
+- مشاوران پیشنهادی
+- جستجو و فیلتر مشاوران
+- رزرو چهارمرحله‌ای: خدمت → مشاور → تاریخ/ساعت → تأیید
+- Slotهای آزاد، رزروشده و مسدود
+- نتیجه رزرو + کد پیگیری
+- ساخت فایل Calendar (`.ics`)
+- صفحه نوبت‌های من: همه / آینده / گذشته
+- لغو نوبت
+- تغییر زمان نوبت
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### مشاور
 
-Note: This will impact Vite dev & build performances.
+- Dashboard جداگانه
+- آمار نوبت‌های امروز، آینده، لغوشده و مراجعین
+- مشاهده و تغییر وضعیت نوبت
+- تقویم روزانه نوبت‌ها
+- فعال/غیرفعال کردن روز کاری
+- تعریف چند بازه ساعت کاری
+- Block کردن Slot خاص
 
-## Expanding the ESLint configuration
+### معماری و UI
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Feature-Based Architecture
+- TanStack Query برای Server State
+- Zustand برای Auth و Booking Draft
+- React Hook Form + Zod
+- MSW برای Mock API
+- Loading / Skeleton / Error / Empty / Disabled / Success States
+- Sidebar در Desktop و Bottom Navigation در Mobile
+- RTL و Responsive Design
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## اجرا
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+برای Build:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
 ```
+
+Mock API به صورت پیش‌فرض فعال است. برای اتصال API واقعی:
+
+```env
+VITE_USE_MOCKS=false
+```
+
+## حساب‌های تست
+
+### مراجعه‌کننده
+
+```text
+user@gmail.com
+1234
+```
+
+یا:
+
+```text
+09121234567
+1234
+```
+
+### مشاور
+
+```text
+consultant@gmail.com
+5678
+```
+
+یا:
+
+```text
+09120000002
+5678
+```
+
+برای جزئیات ساختار پروژه فایل `ARCHITECTURE.md` را ببینید.

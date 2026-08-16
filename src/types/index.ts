@@ -1,8 +1,10 @@
+export type UserRole = "consultant" | "user";
+
 export type User = {
   id: string;
   name: string;
   email: string;
-  role: "consultant" | "user";
+  role: UserRole;
 };
 
 export interface DashboardStats {
@@ -28,11 +30,20 @@ export interface Appointment {
   id: string;
   consultantId: string;
   patientId: string;
+  serviceId?: string;
   service: string;
   date: string;
   startTime: string;
+  duration?: number;
+  price?: number;
   status: AppointmentStatus;
+  trackingCode?: string;
 }
+
+export type Availability = {
+  day: string;
+  slots: string[];
+};
 
 export type Consultant = {
   id: string;
@@ -44,11 +55,52 @@ export type Consultant = {
   experience: number;
   service: string;
   consultationPrice: number;
-  span:number
+  span: number;
   availability: Availability[];
+  isAvailable?: boolean;
 };
 
-export type Availability = {
+export type ClinicService = {
+  id: string;
+  name: string;
+  description: string;
+  duration: number;
+  price: number;
+};
+
+export type TimeSlotStatus = "available" | "booked" | "blocked";
+
+export type TimeSlot = {
+  time: string;
+  status: TimeSlotStatus;
+};
+
+export type BookingDraft = {
+  service: ClinicService | null;
+  consultant: Consultant | null;
+  date: string | null;
+  time: string | null;
+  paymentMethod: "online";
+};
+
+export type BookingResponse = {
+  appointment: Appointment;
+  trackingCode: string;
+};
+
+export type AppointmentFilter = "all" | "upcoming" | "past";
+
+export type WorkingDay = {
   day: string;
-  slots: string[];
+  enabled: boolean;
+  ranges: Array<{
+    from: string;
+    to: string;
+  }>;
+  blockedSlots: string[];
+};
+
+export type ConsultantAvailability = {
+  consultantId: string;
+  workingDays: WorkingDay[];
 };
