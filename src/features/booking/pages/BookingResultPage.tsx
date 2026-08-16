@@ -1,4 +1,4 @@
-import { CalendarDays, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import type { BookingResponse } from "@/types";
 import { formatClinicDate } from "@/utils/date";
@@ -11,39 +11,6 @@ const BookingResultPage = () => {
     return <Navigate to="/appointments" replace />;
   }
 
-  const addToCalendar = () => {
-    const appointment = result.appointment;
-    const start = new Date(`${appointment.date}T${appointment.startTime}:00`);
-    const end = new Date(
-      start.getTime() + (appointment.duration ?? 60) * 60 * 1000,
-    );
-
-    const toIcsDate = (value: Date) =>
-      value.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-
-    const ics = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Aramesh Clinic//Appointment//FA",
-      "BEGIN:VEVENT",
-      `UID:${appointment.id}@aramesh-clinic.local`,
-      `DTSTAMP:${toIcsDate(new Date())}`,
-      `DTSTART:${toIcsDate(start)}`,
-      `DTEND:${toIcsDate(end)}`,
-      `SUMMARY:${appointment.service}`,
-      `DESCRIPTION:کد پیگیری: ${result.trackingCode}`,
-      "END:VEVENT",
-      "END:VCALENDAR",
-    ].join("\r\n");
-
-    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `appointment-${result.trackingCode}.ics`;
-    anchor.click();
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <div className="grid h-full place-items-center overflow-y-auto bg-slate-50 p-5 pb-28">
@@ -79,21 +46,14 @@ const BookingResultPage = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <div className="mt-6 grid gap-3  sm:grid-cols-1">
           <Link
             to="/appointments"
             className="rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white"
           >
             مشاهده نوبت‌های من
           </Link>
-          <button
-            type="button"
-            onClick={addToCalendar}
-            className="flex items-center justify-center gap-2 rounded-xl border px-4 py-3 font-semibold text-slate-700"
-          >
-            <CalendarDays size={18} />
-            افزودن به تقویم
-          </button>
+
         </div>
       </div>
     </div>
