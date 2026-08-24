@@ -1,33 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useDashboard } from "../hooks/useDashboard";
-import { CalendarDaysIcon, CheckCircle2, Clock, Star } from "lucide-react";
 import type { DashboardStats } from "@/types";
 import UpcomingAppointments from "../components/UpcomingAppointments";
 import { useConsultants } from "@/features/consultants/hooks/useConsultants";
 import { ConsultantCard } from "@/features/consultants/components/ConsultantCard";
 import { useBookingStore } from "@/features/booking/store/booking.store";
 import { AsyncState } from "@/components/ui/AsyncState";
+import { StarIcon,CalendarDaysIcon, CircleCheckIcon, ClockIcon } from "@animateicons/react/lucide";
 
 const createDashboardCards = (stats: DashboardStats) => [
   {
     title: "امتیاز شما",
     value: stats.totalScore,
-    icon: Star,
+    icon: StarIcon,
     iconColor: "text-yellow-400",
     after: "از ۵",
   },
   {
     title: "نوبت‌های لغوشده",
     value: stats.cancelledAppointments,
-    icon: Clock,
+    icon: ClockIcon,
     iconColor: "text-red-500",
     after: "نوبت",
   },
   {
     title: "نوبت‌های انجام‌شده",
     value: stats.completedAppointments,
-    icon: CheckCircle2,
+    icon: CircleCheckIcon,
     iconColor: "text-green-500",
     after: "نوبت",
   },
@@ -82,6 +82,7 @@ const DashboardPage = () => {
                       <p className="text-xs text-slate-400 sm:text-sm">{item.after}</p>
                     </div>
                     <item.icon
+                    size={55}
                       className={`size-8 shrink-0 sm:size-11 lg:size-14 ${item.iconColor}`}
                     />
                   </div>

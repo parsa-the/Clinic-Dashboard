@@ -1,4 +1,3 @@
-import { CalendarDays, Clock3, Users, XCircle } from "lucide-react";
 import { AsyncState } from "@/components/ui/AsyncState";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import {
@@ -6,6 +5,7 @@ import {
   useUpdateAppointmentStatus,
 } from "../hooks/useConsultantPanel";
 import { formatClinicDate, getIranToday, toClinicDate } from "@/utils/date";
+import { CalendarIcon, ClockIcon, UserRoundXIcon, UsersIcon } from "@animateicons/react/lucide";
 
 const ConsultantDashboardPage = () => {
   const query = useConsultantAppointments();
@@ -34,24 +34,24 @@ const ConsultantDashboardPage = () => {
       value: appointments.filter(
         (item) => item.date === toClinicDate(getIranToday()),
       ).length,
-      icon: Clock3,
+      icon: ClockIcon,
     },
     {
       title: "نوبت‌های آینده",
       value: appointments.filter(
         (item) => item.status === "تایید شده" || item.status === "در انتظار",
       ).length,
-      icon: CalendarDays,
+      icon: CalendarIcon,
     },
     {
       title: "نوبت‌های لغوشده",
       value: appointments.filter((item) => item.status === "لغو شده").length,
-      icon: XCircle,
+      icon: UserRoundXIcon,
     },
     {
       title: "تعداد مراجعین",
       value: new Set(appointments.map((item) => item.patientId)).size,
-      icon: Users,
+      icon: UsersIcon,
     },
   ];
 
@@ -69,7 +69,7 @@ const ConsultantDashboardPage = () => {
               key={title}
               className="rounded-2xl border bg-white p-5 shadow-sm"
             >
-              <Icon className="text-teal-700" size={28} />
+              <Icon className="text-teal-700" size={34} />
               <p className="mt-4 text-sm text-slate-500">{title}</p>
               <p className="mt-2 text-3xl font-black">
                 {value.toLocaleString("fa-IR")}

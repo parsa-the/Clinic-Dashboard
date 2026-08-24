@@ -9,7 +9,7 @@ import { loginSchema, type LoginFormData } from "../model/login.schema";
 import { useAuthStore } from "../model/auth.store";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
-
+import { EyeClosedIcon, EyeIcon } from "@animateicons/react/lucide";
 const LoginPage = () => {
   const navigate = useNavigate();
   const loginUser = useAuthStore((state) => state.login);
@@ -122,14 +122,21 @@ const LoginPage = () => {
               </label>
 
               <div className="relative">
-                <button  onClick={()=>setPasswordVisible(!passwordVisible)} className="absolute top-2 right-3">
-                 
-                  {passwordVisible ? <Eye color="gray" /> : <EyeClosed color="gray"/>}
+                <button
+                type="button"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="absolute top-2 right-3"
+                >
+                  {passwordVisible ? (
+                    <EyeIcon size={24} duration={1} color="gray" />
+                  ) : (
+                    <EyeClosedIcon size={24} duration={1} color="gray" />
+                  )}
                 </button>
 
                 <input
                   id="password"
-                  type={passwordVisible?"text":"password"}
+                  type={passwordVisible ? "text" : "password"}
                   dir="ltr"
                   autoComplete="current-password"
                   placeholder="*********"

@@ -1,7 +1,7 @@
-import { CheckCircle2 } from "lucide-react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import type { BookingResponse } from "@/types";
 import { formatClinicDate } from "@/utils/date";
+import { CircleCheckIcon } from "@animateicons/react/lucide";
 
 const BookingResultPage = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ const BookingResultPage = () => {
   return (
     <div className="grid h-full place-items-center overflow-y-auto bg-slate-50 p-5 pb-28">
       <div className="w-full max-w-xl rounded-3xl border bg-white p-7 text-center shadow-sm">
-        <CheckCircle2 className="mx-auto text-emerald-500" size={64} />
+        <CircleCheckIcon className="mx-auto text-emerald-500" size={64} />
         <h1 className="mt-4 text-2xl font-black text-slate-900">
           نوبت با موفقیت ثبت شد
         </h1>
