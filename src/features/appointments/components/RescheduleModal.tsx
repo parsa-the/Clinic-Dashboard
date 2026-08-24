@@ -1,11 +1,9 @@
-import { addDays, format } from "date-fns";
 import { X } from "lucide-react";
 import { useState } from "react";
 import type { Appointment, TimeSlot } from "@/types";
 import { AsyncState } from "@/components/ui/AsyncState";
+import { ClinicCalendar } from "@/components/ui/ClinicCalendar";
 import { useTimeSlots } from "@/features/booking/hooks/useTimeSlots";
-
-const days = Array.from({ length: 7 }, (_, index) => addDays(new Date(), index + 1));
 
 type Props = {
   appointment: Appointment;
@@ -38,38 +36,17 @@ export const RescheduleModal = ({ appointment, onClose, onSubmit, pending }: Pro
           </button>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {days.map((item) => {
-            const value = format(item, "yyyy-MM-dd");
-            const disabled = item.getDay() === 5;
-            return (
-              <button
-                type="button"
-                key={value}
-                disabled={disabled}
-                onClick={() => {
-                  setDate(value);
-                  setTime("");
-                }}
-                className={`rounded-xl border p-3 text-sm ${
-                  disabled
-                    ? "cursor-not-allowed bg-slate-100 text-slate-400"
-                    : date === value
-                      ? "border-blue-600 bg-blue-50 text-blue-700"
-                      : "hover:border-blue-300"
-                }`}
-              >
-                {new Intl.DateTimeFormat("fa-IR", {
-                  weekday: "short",
-                  day: "numeric",
-                  month: "short",
-                }).format(item)}
-              </button>
-            );
-          })}
-        </div>
+        <div className="mt-5 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+          <ClinicCalendar
+            value={date}
+            onChange={(value) => {
+              setDate(value);
+              setTime("");
+            }}
+          />
 
-        <div className="mt-5">
+          <section className="rounded-2xl border bg-white p-5">
+            <h3 className="font-bold">ساعت‌های آزاد</h3>
           {!date ? (
             <p className="rounded-xl bg-slate-50 p-5 text-center text-sm text-slate-500">
               ابتدا روز جدید را انتخاب کنید.
@@ -81,7 +58,7 @@ export const RescheduleModal = ({ appointment, onClose, onSubmit, pending }: Pro
           ) : (slots.data ?? []).filter((item) => item.status === "available").length === 0 ? (
             <AsyncState type="empty" title="زمان آزادی وجود ندارد" />
           ) : (
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            <div className="mt-4 grid grid-cols-3 gap-2">
               {(slots.data ?? []).map((slot: TimeSlot) => {
                 const disabled = slot.status !== "available";
                 return (
@@ -104,6 +81,7 @@ export const RescheduleModal = ({ appointment, onClose, onSubmit, pending }: Pro
               })}
             </div>
           )}
+          </section>
         </div>
 
         <div className="mt-6 flex justify-end gap-2 border-t pt-4">

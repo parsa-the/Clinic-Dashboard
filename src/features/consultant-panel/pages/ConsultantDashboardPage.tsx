@@ -5,6 +5,7 @@ import {
   useConsultantAppointments,
   useUpdateAppointmentStatus,
 } from "../hooks/useConsultantPanel";
+import { formatClinicDate, getIranToday, toClinicDate } from "@/utils/date";
 
 const ConsultantDashboardPage = () => {
   const query = useConsultantAppointments();
@@ -30,7 +31,9 @@ const ConsultantDashboardPage = () => {
   const cards = [
     {
       title: "نوبت‌های امروز",
-      value: appointments.filter((item) => item.date === "امروز").length,
+      value: appointments.filter(
+        (item) => item.date === toClinicDate(getIranToday()),
+      ).length,
       icon: Clock3,
     },
     {
@@ -57,7 +60,7 @@ const ConsultantDashboardPage = () => {
       <div className="mx-auto max-w-6xl">
         <h1 className="text-2xl font-black">داشبورد مشاور</h1>
         <p className="mt-2 text-sm text-slate-500">
-          خلاصه نوبت‌ها و وضعیت مراجعین شما
+          نوبت‌ها و وضعیت مراجعین شما
         </p>
 
         <div className="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
@@ -95,7 +98,8 @@ const ConsultantDashboardPage = () => {
                   <div>
                     <p className="font-semibold">{appointment.service}</p>
                     <p className="mt-1 text-sm text-slate-500">
-                      {appointment.date} • {appointment.startTime}
+                      {formatClinicDate(appointment.date)} |{" "}
+                      {appointment.startTime}
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
@@ -110,7 +114,7 @@ const ConsultantDashboardPage = () => {
                             .value as typeof appointment.status,
                         })
                       }
-                      className="rounded-lg border bg-white p-2 px-3 text-xs font-semibold"
+                      className="rounded-lg border bg-white p-3 px-3 text-xs font-semibold"
                     >
                       <option value="در انتظار">در انتظار</option>
                       <option value="تایید شده">تأیید شده</option>

@@ -13,20 +13,7 @@ import AvailabilityPage from "@/features/consultant-panel/pages/AvailabilityPage
 import UserLayout from "./layouts/UserLayout";
 import ConsultantLayout from "./layouts/ConsultantLayout";
 import NotFoundPage from "@/pages/NotFoundPage";
-import { useAuthStore } from "@/features/auth/model/auth.store";
-
-const HomeRedirect = () => {
-  const user = useAuthStore((state) => state.user);
-
-  if (!user) return <Navigate to="/login" replace />;
-
-  return (
-    <Navigate
-      to={user.role === "consultant" ? "/consultant/dashboard" : "/dashboard"}
-      replace
-    />
-  );
-};
+import { HomeRedirect } from "./HomeRedirect";
 
 export const router = createBrowserRouter([
   {

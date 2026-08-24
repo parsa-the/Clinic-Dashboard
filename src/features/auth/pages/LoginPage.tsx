@@ -3,11 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import DotGrid from "@/shared/DotGrid";
+import DotGrid from "@/components/ui/DotGrid";
 import { login } from "../api/login";
 import { loginSchema, type LoginFormData } from "../model/login.schema";
 import { useAuthStore } from "../model/auth.store";
-import { Eye, EyeClosed, EyeDashed } from "lucide-react";
+import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 
 const LoginPage = () => {

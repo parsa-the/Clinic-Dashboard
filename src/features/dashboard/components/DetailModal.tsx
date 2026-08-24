@@ -7,6 +7,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { formatClinicDate } from "@/utils/date";
 
 type Props = {
   appointment: Appointment;
@@ -107,7 +108,7 @@ const DetailModal = ({ consultant, appointment, toggleModal }: Props) => {
                 <div>
                   <p className="text-xs text-zinc-400">تاریخ</p>
                   <p className="mt-1 text-sm font-semibold text-zinc-700">
-                    {appointment.date}
+                    {formatClinicDate(appointment.date)}
                   </p>
                 </div>
               </div>

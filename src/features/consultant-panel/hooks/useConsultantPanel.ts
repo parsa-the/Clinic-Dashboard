@@ -24,8 +24,12 @@ export const useUpdateAvailability = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: updateAvailability,
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeys.availability }),
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: queryKeys.availability }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.allSlots }),
+      ]);
+    },
   });
 };
 

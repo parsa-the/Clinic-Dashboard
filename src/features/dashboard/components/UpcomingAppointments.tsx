@@ -3,6 +3,7 @@ import { useCancelAppointment } from "../hooks/useCancelAppointment";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import DetailModal from "./DetailModal";
+import { formatClinicDate } from "@/utils/date";
 type Props = {
   appointments: Appointment[];
   consultants: Consultant[];
@@ -57,12 +58,14 @@ const UpcomingAppointments = ({ appointments, consultants }: Props) => {
                 <div className="flex min-w-0 items-center gap-3 sm:gap-6">
                   <div className="flex shrink-0 flex-col items-center pl-2 text-sm sm:pl-5">
                     <p className="font-bold">{items.startTime}</p>
-                    <p className="text-slate-400">{items.date}</p>
+                    <p className="text-slate-400">
+                      {formatClinicDate(items.date)}
+                    </p>
                   </div>
 
                   <img
                     src={consultant?.profilePicture}
-                    alt={consultant?.name}
+                    alt={consultant?.name ?? "مشاور"}
                     className="h-14 w-14 shrink-0 rounded-full border object-cover sm:h-20 sm:w-20"
                   />
 

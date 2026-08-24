@@ -4,7 +4,7 @@ import { useAuthStore } from "@/features/auth/model/auth.store";
 
 const navigationItems = [
   { title: "داشبورد", icon: House, route: "/consultant/dashboard" },
-  { title: "تقویم نوبت‌ها", icon: CalendarDays, route: "/consultant/calendar" },
+  { title: " نوبت‌ها", icon: CalendarDays, route: "/consultant/calendar" },
   { title: "مدیریت زمان کاری", icon: Clock3, route: "/consultant/availability" },
 ];
 

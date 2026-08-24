@@ -1,4 +1,5 @@
 import type { BookingDraft } from "@/types";
+import { formatClinicDate } from "@/utils/date";
 
 export const BookingSummary = ({ booking }: { booking: BookingDraft }) => {
   if (!booking.service || !booking.consultant || !booking.date || !booking.time) {
@@ -8,15 +9,7 @@ export const BookingSummary = ({ booking }: { booking: BookingDraft }) => {
   const rows = [
     ["خدمت", booking.service.name],
     ["مشاور", booking.consultant.name],
-    [
-      "تاریخ",
-      new Intl.DateTimeFormat("fa-IR", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }).format(new Date(`${booking.date}T12:00:00`)),
-    ],
+    ["تاریخ", formatClinicDate(booking.date)],
     ["ساعت", booking.time],
     ["مدت جلسه", `${booking.service.duration.toLocaleString("fa-IR")} دقیقه`],
     ["هزینه", `${booking.service.price.toLocaleString("fa-IR")} تومان`],

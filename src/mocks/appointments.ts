@@ -1,4 +1,10 @@
 import type { Appointment } from "@/types";
+import { addDays } from "date-fns";
+import { getIranToday, toClinicDate } from "@/utils/date";
+
+const iranToday = getIranToday();
+const appointmentDate = (dayOffset: number) =>
+  toClinicDate(addDays(iranToday, dayOffset));
 
 export const appointments: Appointment[] = [
   {
@@ -7,7 +13,7 @@ export const appointments: Appointment[] = [
     patientId: "user-1",
     serviceId: "service-1",
     service: "مشاوره روانشناسی فردی",
-    date: "سه‌شنبه ۲۸ مرداد",
+    date: appointmentDate(1),
     startTime: "09:00",
     duration: 45,
     price: 400000,
@@ -20,7 +26,7 @@ export const appointments: Appointment[] = [
     patientId: "user-1",
     serviceId: "service-2",
     service: "مشاوره کودک و نوجوان",
-    date: "چهارشنبه ۲۹ مرداد",
+    date: appointmentDate(2),
     startTime: "10:00",
     duration: 60,
     price: 450000,
@@ -33,7 +39,7 @@ export const appointments: Appointment[] = [
     patientId: "user-1",
     serviceId: "service-1",
     service: "مشاوره روانشناسی فردی",
-    date: "شنبه ۱۸ مرداد",
+    date: appointmentDate(-6),
     startTime: "11:00",
     duration: 45,
     price: 400000,
@@ -46,7 +52,7 @@ export const appointments: Appointment[] = [
     patientId: "user-1",
     serviceId: "service-3",
     service: "مشاوره خانواده",
-    date: "یکشنبه ۱۹ مرداد",
+    date: appointmentDate(-5),
     startTime: "14:30",
     duration: 60,
     price: 500000,
@@ -59,7 +65,7 @@ export const appointments: Appointment[] = [
     patientId: "user-2",
     serviceId: "service-1",
     service: "مشاوره روانشناسی فردی",
-    date: "امروز",
+    date: appointmentDate(0),
     startTime: "12:00",
     duration: 45,
     price: 400000,

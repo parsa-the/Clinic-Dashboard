@@ -90,17 +90,12 @@ export type BookingResponse = {
 
 export type AppointmentFilter = "all" | "upcoming" | "past";
 
-export type WorkingDay = {
-  day: string;
-  enabled: boolean;
-  ranges: Array<{
-    from: string;
-    to: string;
-  }>;
+export type BlockedAvailabilityDate = {
+  date: string;
   blockedSlots: string[];
 };
 
 export type ConsultantAvailability = {
   consultantId: string;
-  workingDays: WorkingDay[];
+  blockedDates: BlockedAvailabilityDate[];
 };

@@ -1,4 +1,4 @@
-import { CalendarDays, House, icons, Plus, User2, Users } from "lucide-react";
+import { CalendarDays, House, Plus, User2, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const navItems = [
