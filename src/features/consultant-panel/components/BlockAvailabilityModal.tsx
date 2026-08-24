@@ -45,7 +45,7 @@ export const BlockAvailabilityModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-[100] grid place-items-center bg-black/35 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-100 grid place-items-center bg-black/35 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <section
