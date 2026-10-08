@@ -49,7 +49,12 @@ const BookingPage = () => {
   };
 
   const submit = () => {
-    if (!booking.service || !booking.consultant || !booking.date || !booking.time) {
+    if (
+      !booking.service ||
+      !booking.consultant ||
+      !booking.date ||
+      !booking.time
+    ) {
       toast.error("اطلاعات رزرو کامل نیست.");
       return;
     }
@@ -116,10 +121,7 @@ const BookingPage = () => {
                 onRetry={() => void consultantsQuery.refetch()}
               />
             ) : (consultantsQuery.data ?? []).length === 0 ? (
-              <AsyncState
-                type="empty"
-                title="مشاوری برای این خدمت پیدا نشد"
-              />
+              <AsyncState type="empty" title="مشاوری برای این خدمت پیدا نشد" />
             ) : (
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {(consultantsQuery.data ?? []).map((consultant) => (

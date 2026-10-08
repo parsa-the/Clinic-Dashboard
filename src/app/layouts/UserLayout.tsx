@@ -4,10 +4,10 @@ import { Outlet } from "react-router-dom";
 
 const UserLayout = () => (
   <main className="flex h-dvh w-full overflow-hidden bg-slate-50" dir="rtl">
+    <UserSidebar />
     <div className="min-w-0 flex-1">
       <Outlet />
     </div>
-    <UserSidebar />
     <MobileNav />
   </main>
 );

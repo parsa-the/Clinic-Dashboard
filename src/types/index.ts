@@ -53,7 +53,7 @@ export type Consultant = {
   rating: number;
   bio: string;
   experience: number;
-  service: string;
+  serviceId: string;
   consultationPrice: number;
   span: number;
   availability: Availability[];

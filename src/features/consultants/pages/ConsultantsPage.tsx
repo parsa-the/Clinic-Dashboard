@@ -5,14 +5,14 @@ import { AsyncState } from "@/components/ui/AsyncState";
 import { ConsultantCard } from "../components/ConsultantCard";
 import { useConsultants } from "../hooks/useConsultants";
 import { useBookingStore } from "@/features/booking/store/booking.store";
-
+import { useServices } from "@/features/services/hooks/useServices";
 const ConsultantsPage = () => {
   const [search, setSearch] = useState("");
   const [specialty, setSpecialty] = useState("all");
   const navigate = useNavigate();
   const booking = useBookingStore();
   const query = useConsultants(search);
-
+  const servicesQuery = useServices();
   return (
     <div className="h-full overflow-y-auto bg-slate-50 p-4 pb-28 sm:p-6">
       <div className="mx-auto max-w-7xl">
@@ -63,16 +63,28 @@ const ConsultantsPage = () => {
                     consultant.specialty.includes(specialty),
                 )
                 .map((consultant) => (
-                <ConsultantCard
-                  key={consultant.id}
-                  consultant={consultant}
-                  actionLabel="رزرو نوبت"
-                  onSelect={() => {
-                    booking.reset();
-                    navigate("/booking");
-                  }}
-                />
-              ))}
+                  <ConsultantCard
+                    key={consultant.id}
+                    consultant={consultant}
+                    actionLabel="رزرو نوبت"
+                    onSelect={() => {
+                      const service = (servicesQuery.data ?? []).find(
+                        (s) => s.id === consultant.serviceId,
+                      );
+
+                      if (service) {
+                        booking.setService(service);
+                        booking.setConsultant(consultant);
+                        booking.setStep(3);
+                      } else {
+                        booking.setConsultant(consultant);
+                        booking.setStep(1);
+                      }
+
+                      navigate("/booking");
+                    }}
+                  />
+                ))}
             </div>
           )}
         </div>

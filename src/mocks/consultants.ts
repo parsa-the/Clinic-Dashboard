@@ -1,5 +1,4 @@
 import type { Consultant } from "@/types";
-
 export const consultants: Consultant[] = [
   {
     id: "1",
@@ -9,7 +8,7 @@ export const consultants: Consultant[] = [
     rating: 4.9,
     bio: "مشاور فردی با تمرکز بر رشد فردی، مدیریت استرس و بهبود کیفیت زندگی.",
     experience: 3,
-    service: "مشاوره فردی",
+    serviceId: "service-1",
     consultationPrice: 400000,
     span: 45,
     availability: [],
@@ -23,7 +22,7 @@ export const consultants: Consultant[] = [
     rating: 4.8,
     bio: "متخصص کودک و نوجوان با تجربه در مسائل اضطرابی، رفتاری و هیجانی.",
     experience: 6,
-    service: "روانشناسی بالینی",
+    serviceId: "service-2",
     consultationPrice: 450000,
     span: 60,
     availability: [],
@@ -37,7 +36,7 @@ export const consultants: Consultant[] = [
     rating: 4.6,
     bio: "مشاور با تجربه در درمان اختلالات خلقی، اضطراب و فرسودگی روانی.",
     experience: 6,
-    service: "روانشناسی بالینی",
+    serviceId: "service-1",
     consultationPrice: 420000,
     span: 45,
     availability: [],
@@ -51,7 +50,7 @@ export const consultants: Consultant[] = [
     rating: 4.7,
     bio: "متخصص مشاوره خانواده، زوج‌درمانی و حل تعارض‌های بین‌فردی.",
     experience: 10,
-    service: "مشاوره خانواده",
+    serviceId: "service-3",
     consultationPrice: 500000,
     span: 60,
     availability: [],
